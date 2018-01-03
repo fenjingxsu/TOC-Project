@@ -32,7 +32,7 @@ class TocMachine(GraphMachine):
         text = update.message.text
         self.boardtemp=text
         result = requests.get('https://www.ptt.cc/bbs/'+self.boardtemp+'/index.html')
-        update.message.reply_text(('https://www.ptt.cc/bbs/'+self.boardtemp+'/index.html'))
+        #update.message.reply_text(('https://www.ptt.cc/bbs/'+self.boardtemp+'/index.html'))
         self.URLtmp1 = 'https://www.ptt.cc/bbs/'+self.boardtemp+'/index'
         soup = BeautifulSoup(result.content, 'html.parser')
         i=1
@@ -88,7 +88,7 @@ class TocMachine(GraphMachine):
     def on_enter_chooseArticle(self, update):
         text=update.message.text
         text=int(text)
-        update.message.reply_text(text)
+        #update.message.reply_text(text)
         read = requests.get(PTT_URL + self.links[text-1])
         read_Find= BeautifulSoup(read.content, 'html.parser')
         article=read_Find.find('div', id='main-container')
@@ -101,12 +101,3 @@ class TocMachine(GraphMachine):
     def backto_search(self, update):
         return True
             
-    def on_exit_state1(self, update):
-        print('Leaving state1')
-
-    def on_enter_state2(self, update):
-        update.message.reply_text("I'm entering state2")
-        self.go_back(update)
-
-    def on_exit_state2(self, update):
-        print('Leaving state2')

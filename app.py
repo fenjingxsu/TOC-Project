@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 import requests
 
 API_TOKEN = '385048749:AAEqaJO5GIdjJSDfMEkSdAn0wNK_18VOoP0'
-WEBHOOK_URL = 'https://bf96dbf0.ngrok.io/hook'
+WEBHOOK_URL = 'https://5497d680.ngrok.io/hook'
 
 app = Flask(__name__)
 bot = telegram.Bot(token=API_TOKEN)
@@ -21,13 +21,12 @@ machine = TocMachine(
         'articles',
         'lastPage',
 		'chooseArticle',
-		'count'
     ],
     transitions=[
         {
             'trigger': 'advance',
             'source': 'searchBoard',
-            'dest': 'articles',
+            'dest': 'articles'
         },
         {
             'trigger': 'advance',
@@ -66,14 +65,6 @@ machine = TocMachine(
             'dest': 'searchBoard',
             'conditions': 'backto_search'
         },
-        {
-            'trigger': 'go_back',
-            'source': [
-                'state1',
-                'state2'
-            ],
-            'dest': 'user'
-        }
     ],
     initial='searchBoard',
     auto_transitions=False,
